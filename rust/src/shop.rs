@@ -8,7 +8,7 @@ impl Shop {
         }
 
         if !user.verified() {
-            return true;
+            return false;
         }
 
         true

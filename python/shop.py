@@ -13,7 +13,6 @@ class Address:
 @dataclass
 class User:
     name: str
-    email: str
     age: int
     address: Address
     verified: bool
@@ -25,7 +24,7 @@ class Shop:
         if user.age <= 18:
             return False
         if not user.verified:
-            return True
+            return False
         else:
             return True
 

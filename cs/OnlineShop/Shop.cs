@@ -11,7 +11,7 @@ public class Shop
 
     if (!user.Verified)
     {
-      return true;
+      return false;
     }
 
     return true;

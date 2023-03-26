@@ -4,7 +4,7 @@ namespace OnlineShop.Tests;
 
 
 // Using the Builder pattern - lots of method that mutate
-// and return `this` 
+// and return `this`
 public class UserBuilder
 {
   private string _name = "";
@@ -41,7 +41,7 @@ public class UserBuilder
 
   public UserBuilder Foreigner()
   {
-    _address = new Address("33 quai d'Orsay", "", "Paris", "75007", "Paris");
+    _address = new Address("33 quai d'Orsay", "", "Paris", "75007", "France");
     return this;
   }
 

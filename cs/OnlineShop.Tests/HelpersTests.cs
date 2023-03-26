@@ -1,7 +1,7 @@
 namespace OnlineShop.Tests;
 
 
-public class HelperTests
+public class HelpersTests
 {
 
   [Test]

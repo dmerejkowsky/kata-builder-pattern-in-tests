@@ -43,22 +43,12 @@ impl Address {
 pub struct User {
     name: String,
     email: String,
-    age: u8,
     address: Address,
+    age: u8,
     verified: bool,
 }
 
 impl User {
-    pub fn new(name: &str, email: &str, age: u8, address: Address, verified: bool) -> Self {
-        Self {
-            name: name.to_owned(),
-            email: email.to_owned(),
-            age,
-            address,
-            verified,
-        }
-    }
-
     pub fn name(&self) -> &str {
         &self.name
     }
@@ -79,3 +69,6 @@ impl User {
         &self.email
     }
 }
+
+#[cfg(test)]
+mod tests;

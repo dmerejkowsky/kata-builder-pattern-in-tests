@@ -2,23 +2,13 @@ namespace OnlineShop.Tests;
 
 public class ShopTests
 {
-  private readonly Address _fsfAddress;
-  private readonly Address _parisAddress;
-
-  public ShopTests()
-  {
-    _fsfAddress = new Address("51 Franklin Street", "Fifth Floor", "Boston", "02110", "USA");
-    _parisAddress = new Address("33 quai d'Orsay", "", "Paris", "75007", "Paris");
-  }
-
-
   [Test]
   public void HappyPath()
   {
-    var user = new User("user", "bob@domain.tld", 25, true, _fsfAddress);
+    var bob = AUser.Named("Bob").Build();
 
-    var canOrder = Shop.CanOrder(user);
-    var foreignFee = Shop.MustPayForeignFee(user);
+    var canOrder = Shop.CanOrder(bob);
+    var foreignFee = Shop.MustPayForeignFee(bob);
 
     canOrder.ShouldBeTrue();
     foreignFee.ShouldBeFalse();
@@ -27,9 +17,9 @@ public class ShopTests
   [Test]
   public void MinorCannotOrderFromTheShop()
   {
-    var user = new User("user", "bob@domain.tld", 16, true, _fsfAddress);
+    var bob = AUser.Named("Bob").Minor().Build();
 
-    var canOrder = Shop.CanOrder(user);
+    var canOrder = Shop.CanOrder(bob);
 
     canOrder.ShouldBeFalse();
   }
@@ -37,10 +27,9 @@ public class ShopTests
   [Test]
   public void NonVerifiedUserCannotOrderFromTheShop()
   {
-    var user = new User("user", "bob@domain.tld", 16, false, _fsfAddress);
+    var bob = AUser.Named("Bob").UnVerified().Build();
 
-
-    var canOrder = Shop.CanOrder(user);
+    var canOrder = Shop.CanOrder(bob);
 
     canOrder.ShouldBeFalse();
   }
@@ -48,10 +37,9 @@ public class ShopTests
   [Test]
   public void ForeignersMustPayForeignFee()
   {
-    var user = new User("user", "bob@domain.tld", 25, true, _parisAddress);
+    var bob = AUser.Named("Bob").Foreigner().Build();
 
-
-    var foreignFee = Shop.MustPayForeignFee(user);
+    var foreignFee = Shop.MustPayForeignFee(bob);
 
     foreignFee.ShouldBeTrue();
   }
