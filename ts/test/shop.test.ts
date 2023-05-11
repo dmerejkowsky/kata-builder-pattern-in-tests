@@ -1,33 +1,30 @@
 import { test, expect } from "@jest/globals"
 
-import Address from '../address'
 import Shop from '../shop'
-import User from '../user'
+import { buildUser } from "./helpers"
 
-const fsfAddress = new Address("51 Franklin Street", "Fifth Floor", "Boston", "02110", "USA")
-const parisAddress = new Address("33 quai d'Orsay", "", "Paris", "75007", "France")
 
 test('happy path', () => {
-  const user = new User({ name: "Bob", "email": "bob@domain.tld", age: 25, address: fsfAddress, verified: true })
+  const user = buildUser("bob")
 
   expect(Shop.canOrder(user)).toBe(true)
   expect(Shop.mustPayForeignFee(user)).toBe(false)
 })
 
 test('minor users cannot order from the shop', () => {
-  const user = new User({ name: "Bob", "email": "bob@domain.tld", age: 16, address: fsfAddress, verified: true })
+  const user = buildUser("bob", { minor: true })
 
   expect(Shop.canOrder(user)).toBe(false)
 })
 
 test('must be a verified user to order from the shop', () => {
-  const user = new User({ name: "Bob", "email": "bob@domain.tld", age: 16, address: fsfAddress, verified: false })
+  const user = buildUser("bob", { verified: false })
 
   expect(Shop.canOrder(user)).toBe(false)
 })
 
 test('foreigners must pay foreign fee', () => {
-  const user = new User({ name: "Bob", "email": "bob@domain.tld", age: 25, address: parisAddress, verified: true })
+  const user = buildUser("bob", { foreign: true })
 
   expect(Shop.mustPayForeignFee(user)).toBe(true)
 })

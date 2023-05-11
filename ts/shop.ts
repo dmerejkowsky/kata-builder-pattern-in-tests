@@ -7,7 +7,7 @@ export default class Shop {
     }
 
     if (!user.verified) {
-      return true
+      return false
     }
 
     return true
