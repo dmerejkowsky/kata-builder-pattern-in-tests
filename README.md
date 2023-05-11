@@ -31,13 +31,14 @@ function canOrder (user) {
 
 ```
 
-The bug was not caught because we also a bug in the tests:
+The bug was not caught because we also have a bug in the tests:
 
 ```javascript
 test('must be a verified user to order from the shop', t => {
   const user = new User({ name: "Bob", "email": "bob@domain.tld", age: 16, address: fsfAddress, verified: false })
-  // Should age an age greater than 18
 })
 ```
-```
 
+The age of the test user should be greater than 25 so that the tests really check what happends when the user is not verified.
+
+It's likely to be missed when copy/pasting test users declarations.
