@@ -19,6 +19,48 @@ class User:
     verified: bool
 
 
+@dataclass
+class UserBuilder:
+    name: str
+    email: str
+    age: int
+    address: Address
+    verified: bool
+
+    def __init__(self):
+        self.name = "bob"
+        self.email = "bob@domain.tld"
+
+    def with_name(self, name):
+        self.name = name
+        return self
+
+    def with_email(self, email):
+        self.email = email
+        return self
+
+    def with_age(self, age):
+        self.age = age
+        return self
+
+    def with_verified_status(self, verified):
+        self.verified = verified
+        return self
+
+    def with_address(self, address):
+        self.address = address
+        return self
+
+    def build(self):
+        return User(
+            name=self.name,
+            email=self.email,
+            age=self.age,
+            address=self.address,
+            verified=self.verified,
+        )
+
+
 class Shop:
     @classmethod
     def can_order(cls, user):
