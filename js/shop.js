@@ -1,6 +1,6 @@
 class Shop {
     static canOrder(user) {
-        if (user.age <= 18) {
+        if (user.age < 18) {
             return false
         }
 

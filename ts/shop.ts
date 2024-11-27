@@ -2,7 +2,7 @@ import User from "./user"
 
 export default class Shop {
   static canOrder(user: User): boolean {
-    if (user.age <= 18) {
+    if (user.age < 18) {
       return false
     }
 
